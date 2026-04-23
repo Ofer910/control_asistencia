@@ -69,7 +69,9 @@
         </table>
 
     </section>
-
+    <div>
+        <h1>Pruebas</h1>
+    </div>
 </div>
 
 <script src="script.js"></script>
