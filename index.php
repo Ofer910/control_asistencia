@@ -4,45 +4,72 @@
     <meta charset="UTF-8">
     <title>Control de Asistencia</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div class="background"></div>
+<div class="container">
 
-<div class="card">
-    <h1>📋 Asistencia</h1>
-    <p class="sub">Registro rápido de ingreso</p>
+    <header>
+        <h1>📊 Control de Asistencia</h1>
+    </header>
 
-    <form id="formAsistencia" method="POST">
-        <div class="input-group">
-            <input type="text" name="nombre" id="nombre" required>
-            <label>Nombre completo</label>
-        </div>
+    <!-- FORMULARIO -->
+    <section class="form-section">
+        <h2>Registrar Asistencia</h2>
 
-        <div class="input-group">
-            <input type="text" name="dni" id="dni" required>
-            <label>DNI</label>
-        </div>
+        <form method="POST">
+            <input type="text" name="nombre" placeholder="Nombre completo" required>
+            <input type="text" name="dni" placeholder="DNI" required>
+            <button type="submit">Registrar</button>
+        </form>
+    </section>
 
-        <button type="submit">Registrar</button>
-    </form>
+    <!-- BUSCADOR -->
+    <section class="search-section">
+        <input type="text" id="buscador" placeholder="🔍 Buscar por nombre o DNI...">
+    </section>
 
-    <div id="mensaje">
-        <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $nombre = htmlspecialchars($_POST["nombre"]);
-            $dni = htmlspecialchars($_POST["dni"]);
-            $fecha = date("d/m/Y H:i");
+    <!-- TABLA -->
+    <section class="table-section">
+        <h2>Registros</h2>
 
-            echo "<div class='success'>
-                    ✅ <strong>$nombre</strong><br>
-                    DNI: $dni <br>
-                    <small>$fecha</small>
-                  </div>";
-        }
-        ?>
-    </div>
+        <table id="tabla">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>DNI</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            <?php
+            // Simulación de almacenamiento (array)
+            $registros = [];
+
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $nombre = htmlspecialchars($_POST["nombre"]);
+                $dni = htmlspecialchars($_POST["dni"]);
+                $fecha = date("d/m/Y H:i");
+
+                $registros[] = [$nombre, $dni, $fecha];
+            }
+
+            // Mostrar registros (simulado)
+            foreach ($registros as $r) {
+                echo "<tr>
+                        <td>{$r[0]}</td>
+                        <td>{$r[1]}</td>
+                        <td>{$r[2]}</td>
+                      </tr>";
+            }
+            ?>
+
+            </tbody>
+        </table>
+
+    </section>
+
 </div>
 
 <script src="script.js"></script>

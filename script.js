@@ -1,8 +1,9 @@
-document.getElementById("formAsistencia").addEventListener("submit", function(e) {
-    let dni = document.getElementById("dni").value.trim();
+document.getElementById("buscador").addEventListener("keyup", function() {
+    let filtro = this.value.toLowerCase();
+    let filas = document.querySelectorAll("#tabla tbody tr");
 
-    if (dni.length !== 8 || isNaN(dni)) {
-        alert("El DNI debe tener 8 números");
-        e.preventDefault();
-    }
+    filas.forEach(fila => {
+        let texto = fila.textContent.toLowerCase();
+        fila.style.display = texto.includes(filtro) ? "" : "none";
+    });
 });
